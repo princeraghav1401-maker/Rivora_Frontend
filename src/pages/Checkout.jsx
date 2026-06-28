@@ -1,0 +1,9 @@
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { money } from '../utils/format';
+
+export default function Checkout() {
+  const cart = useCart();
+  return <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-cream px-5 py-16 text-forest-800 lg:px-14"><div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.4fr_.8fr]"><section><p className="text-xs uppercase tracking-[.35em] text-gold-dark">Secure checkout</p><h1 className="mt-3 font-display text-5xl md:text-7xl">Checkout</h1><form className="mt-10 grid gap-4 rounded-3xl bg-white p-6 shadow-sm md:grid-cols-2"><input className="checkout-input" placeholder="Full Name" /><input className="checkout-input" placeholder="Email" /><input className="checkout-input" placeholder="Phone" /><input className="checkout-input" placeholder="City" /><input className="checkout-input md:col-span-2" placeholder="Full Address" /><button type="button" className="btn-primary md:col-span-2">Place Order</button></form></section><aside className="h-fit rounded-3xl bg-forest-800 p-6 text-cream"><h2 className="font-display text-3xl">Order Summary</h2><div className="mt-5 space-y-4">{cart.items.length === 0 ? <p className="text-sage-100">Cart empty hai. <Link className="text-gold" to="/collections">Shop now</Link></p> : cart.items.map((item) => <div key={item.id} className="flex gap-3 border-b border-gold/10 pb-4"><img src={item.img} className="h-16 w-16 rounded-xl object-cover" /><div><p className="line-clamp-1 text-sm">{item.title}</p><small className="text-sage-100">Qty {item.qty}</small><b className="block text-gold">{money(item.price * item.qty)}</b></div></div>)}</div><div className="mt-6 flex justify-between text-xl"><span>Total</span><b>{money(cart.total)}</b></div></aside></div></motion.main>;
+}

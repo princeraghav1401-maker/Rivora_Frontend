@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --color-forest-950: #111811;
+  --color-forest-900: #1A241C;
+  --color-forest-800: #20281F;
+  --color-forest-700: #2A3328;
+  --color-forest-600: #4F573B;
+  --color-gold: #C9A35A;
+  --color-gold-dark: #B58E45;
+  --color-cream: #F8F4ED;
+  --color-sage-100: #CFC9BC;
+  --color-sage-200: #DAD6C9;
+  --shadow-gold: 0 0 35px rgba(201, 163, 90, .22);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font-sans); background: #1A241C; }
+a { text-decoration: none; }
+button, input, textarea, select { font-family: inherit; }
+
+@layer components {
+  .nav-icon { @apply grid h-11 w-11 place-items-center rounded-full border border-gold/15 bg-white/5 text-cream transition hover:border-gold/45 hover:bg-gold/10 hover:text-gold; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 font-semibold text-forest-950 shadow-gold transition hover:bg-gold-dark hover:scale-[1.02]; }
+  .btn-ghost { @apply inline-flex items-center justify-center rounded-full border border-gold/25 px-7 py-4 font-semibold text-cream transition hover:border-gold hover:bg-gold/10; }
+  .form-input { @apply rounded-2xl border border-forest-700/10 bg-forest-600/45 p-5 text-cream outline-none placeholder:text-cream focus:border-gold focus:ring-4 focus:ring-gold/10; }
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+::selection { background: #C9A35A; color: #111811; }
+
+@layer components {
+  .checkout-input { @apply rounded-2xl border border-forest-700/10 bg-cream px-5 py-4 text-forest-800 outline-none transition placeholder:text-forest-600/50 focus:border-gold focus:ring-4 focus:ring-gold/10; }
+}
+
+/* Premium polish */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(circle at 20% 10%, rgba(201,163,90,.04), transparent 28%), radial-gradient(circle at 80% 15%, rgba(255,255,255,.035), transparent 24%);
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #111811; }
+::-webkit-scrollbar-thumb { background: #4F573B; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A35A; }
+
+@media (max-width: 640px) {
+  .btn-primary, .btn-ghost { width: 100%; }
+}
